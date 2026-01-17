@@ -66,20 +66,34 @@ public class JournalEnrtyController {
         journalEntryService.deleteById(myId,userName);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT );
     }
-/*
-    @PutMapping("id/{id}")
-    public ResponseEntity<?> UpdateJournalById(@PathVariable ObjectId id, @RequestBody JournalEntry newEntry)
+
+    @PutMapping("id/{userName}/{id}")
+    public ResponseEntity<?> UpdateJournalById(@PathVariable ObjectId id,
+                                               @RequestBody JournalEntry newEntry,
+                                               @PathVariable String userName)
     {
       JournalEntry old = journalEntryService.findById(id).orElse(null);
       if(old!=null)
       {
-            old.setTitle(newEntry.getTitle()!=null&& !newEntry.getTitle().equals("")? newEntry.getTitle() : old.getTitle());
+            /*old.setTitle(newEntry.getTitle()!=null&& !newEntry.getTitle().equals("")? newEntry.getTitle() : old.getTitle());
             old.setContent(newEntry.getTitle()!=null&& !newEntry.getTitle().equals("")? newEntry.getTitle() : old.getTitle());
-            journalEntryService.saveEntry(old, user);
-          return new ResponseEntity<>(HttpStatus.OK);
+            journalEntryService.saveEntry(old);
+          return new ResponseEntity<>(HttpStatus.OK);*/
+
+          if(newEntry.getTitle()!=null && !newEntry.getTitle().isEmpty())
+          {
+              old.setTitle(newEntry.getTitle());
+          }
+          if(newEntry.getContent()!=null && !newEntry.getContent().isEmpty())
+          {
+              old.setContent(newEntry.getContent());
+          }
+
+          journalEntryService.saveEntry(old);
+          return  new ResponseEntity<>(HttpStatus.OK);
       }
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-    }*/
+    }
 }

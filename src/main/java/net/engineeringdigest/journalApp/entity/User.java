@@ -19,12 +19,9 @@ public class User {
     private ObjectId id;
 
     @Indexed(unique = true)
-
-    @NonNull
     @lombok.NonNull
     private String userName;
 
-    @NonNull
     @lombok.NonNull
     private String password;
     private LocalDateTime date;
